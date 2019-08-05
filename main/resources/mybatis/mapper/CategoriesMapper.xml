@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CategoriesMapper">
+
+
+    <!-- 根据条件获取所有报名课程 -->
+    <select id="getCategoriesList" parameterType="pd" resultType="com.example.order.entities.Category">
+        select
+        *,
+        (
+        select
+        count(id)
+        from
+        tb_category
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and (category_name like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by create_time desc
+        ) as total
+        from
+        tb_category
+        <where>
+
+            <if test="keyword != null and keyword != ''">
+                and (category_name like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by create_time desc
+        <if test="length != null  and length!='' and length != -1">
+            limit #{start},#{length}
+        </if>
+    </select>
+
+
+    <!-- 删除课程 -->
+    <delete id="deleteCategory" parameterType="pd">
+        delete
+        from
+        tb_category
+        where
+        id = #{id}
+    </delete>
+
+
+    <!-- 得到所有课程 -->
+    <select id="getAllcategories" parameterType="pd" resultType="com.example.order.entities.Category">
+        select
+            id,
+            category_name
+        from
+          tb_category
+        order by create_time desc
+    </select>
+
+
+
+    <!-- 新增分类-->
+    <insert id="addCategory" keyProperty="id" useGeneratedKeys="true" parameterType="pd">
+        insert into
+        tb_category
+        (category_name, create_time)
+        values
+        ( #{categoryName},#{create_time})
+    </insert>
+</mapper>

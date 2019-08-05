@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+
+
+	<!-- 根据条件获取所有用户 -->
+	<select id="getUserList" parameterType="pd" resultType="com.example.order.entities.User">
+		select
+		*,
+		(
+		select
+		count(id)
+		from
+		tb_user
+		<where>
+			<if test="keyword != null and keyword != ''">
+				and (phone like CONCAT('%',#{keyword},'%'))
+			</if>
+		</where>
+		order by create_time desc
+		) as total
+		from
+		tb_user
+		<where>
+			<if test="keyword != null and keyword != ''">
+				and (phone like CONCAT('%',#{keyword},'%'))
+			</if>
+		</where>
+		order by create_time desc
+		<if test="length != null  and length!='' and length != -1">
+			limit #{start},#{length}
+		</if>
+	</select>
+
+
+	<!-- 根据id获取用户详情 -->
+	<select id="getUserInfoById" parameterType="pd" resultType="com.example.order.entities.User">
+		select
+		*
+		from
+		tb_user
+		where
+		id = #{uid}
+	</select>
+
+
+	<!-- 根据id获取所有用户已报名课程 -->
+	<select id="getUserOrderList" parameterType="pd" resultType="com.example.order.entities.UserOrder">
+		select
+		*,
+		(
+		select
+		count(id)
+		from
+		tb_orders
+		where
+		user_id = #{uid}
+		) as totalPage
+		from
+		tb_orders
+		where
+		user_id = #{uid}
+		order by create_time desc
+		<if test="length != null  and length!='' and length != -1">
+			limit #{start},#{length}
+		</if>
+	</select>
+
+
+	<!-- 更新用户订单状态 -->
+	<update id="updateUserOrderStatus"  parameterType="pd">
+		update
+		tb_orders
+		<trim prefix="set" suffixOverrides="," >
+			<if test="status != null and status != ''">
+				state = #{status},
+			</if>
+		</trim>
+		where
+		order_oid = #{oid}
+	</update>
+</mapper>

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.tab-money{
+	background-color: rgb(243,156,18);
+	width:200px;
+	height:140px;
+	margin:5%;
+}
+.tab-money-font{
+	color:#FFF;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 3px;
+	padding-top: 8px;
+}

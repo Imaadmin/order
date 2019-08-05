@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>后台管理系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="dist/fonts/font-awesome.min.css" th:href="@{/static/dist/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" href="dist/fonts/ionicons.min.css" th:href="@{/static/dist/fonts/ionicons.min.css}">
+    <link rel="stylesheet" href="dist/bootstrap/bootstrap.min.css" th:href="@{/static/dist/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" href="dist/select2/select2.min.css" th:href="@{/static/dist/select2/select2.min.css}">
+    <link rel="stylesheet" href="dist/adminlte/AdminLTE.css" th:href="@{/static/dist/adminlte/AdminLTE.css}">
+    <link rel="stylesheet" href="dist/adminlte/skin-mcblue.css" th:href="@{/static/dist/adminlte/skin-mcblue.css}">
+    <link rel="stylesheet" href="mcfish/css/mcfish.css" th:href="@{/static/mcfish/css/mcfish.css}">
+
+    <style>
+        #menuFrame {
+            width: 100%;
+        }
+    </style>
+    <!-- jQuery 3 -->
+    <script th:src="@{/static/dist/jquery/jquery.min.js}" src="dist/jquery/jquery.min.js"></script>
+    <script>
+        function iframeHight() {
+            var ifm = document.getElementById("menuFrame");
+            ifm.height = document.documentElement.clientHeight
+            var bodyHeight = document.body.clientHeight
+            $('#leftMenu').css({
+                'height': bodyHeight,
+                'overflow-y': 'auto'
+            }) // 这里会碰***隐藏显示
+        }
+
+        window.onresize = function () {
+            iframeHight()
+        }
+    </script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini" style="overflow: hidden;">
+<div class="wrapper">
+    <header class="main-header">
+        <a href="${pageContext.request.contextPath}/shareBasicController/toWelcomePage.do"
+           th:href="@{/shareBasicController/toWelcomePage}" target="menuFrame" class="logo">
+            <span class="logo-mini" style="color: #ff9751;"><b>订</b>单</span>
+            <span class="logo-lg"><b id="indexProjectName">订单管理</b></span>
+        </a>
+
+        <nav class="navbar navbar-static-top" role="navigation">
+            <div class="container pull-left" style="width: 100%; padding-left: 0; padding-right: 13px;">
+
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <!-- 头部导航栏右侧菜单（消息菜单、用户菜单） -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<span th:text="${session.admin.getUsername()}" class="hidden-xs"><i
+                                                class="fa fa-fw fa-user"></i>
+											<font size="4"> </font>
+										</span>
+                            </a>
+                        </li>
+                        <li onclick="refresh();"><a href="javascript:;"><i class="fa fa-refresh"></i></a>
+                            <!-- 用户按钮 -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img id="userImg"
+                                     src="http://p.qlogo.cn/bizmail/EYpKfaTucnc9cmico9IQALvL628bCoZgtubJ6RoqGhl8ndXdtnZ6OYA/0"
+                                     class="user-image">
+                                <span class="hidden-xs" id="user_Name">...</span>
+                            </a>
+                            <ul class="dropdown-menu systemConfig">
+                                <li class="visi-settings">
+                                    <a href="javascript:;" target="menuFrame" onclick="openEditPwdView()">修改密码</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" onclick="loginOut()">注销</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <!-- 左侧菜单 -->
+        <section class="sidebar" id="developLeftMenu">
+            <ul class="sidebar-menu mc-menu" data-widget="tree" id="leftMenu">
+                <!-- 菜单管理 -->
+
+                <ul class="sidebar-menu mc-menu" data-widget="tree">
+                    <li class="treeview">
+                        <a th:href="@{/home/toHomePage}"
+                           href="${pageContext.request.contextPath}/agentDataController/AgentDataPage.do"
+                           target="menuFrame">
+                            <i class="glyphicon glyphicon-home">
+                            </i>
+                            <span>数据统计</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a th:href="@{/user/toUserPage}"
+                           href="${pageContext.request.contextPath}/userController/UserPage.do"
+                           target="menuFrame">
+                            <i class="glyphicon glyphicon-user">
+                            </i>
+                            <span>用户管理</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a th:href="@{/banner/toBannerPage}"
+                           href=""
+                           target="menuFrame">
+                            <i class="glyphicon glyphicon-bold">
+                            </i>
+                            <span>Banner管理</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a th:href="@{/categories/toCategoriesPage}"
+                           href=""
+                           target="menuFrame">
+                            <i class="glyphicon glyphicon-list-alt">
+                            </i>
+                            <span>分类管理</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a th:href="@{/variety/toVarietyPage}"
+                           href=""
+                           target="menuFrame">
+                            <i class="fa fa-camera-retro">
+                            </i>
+                            <span>菜品管理</span>
+                        </a>
+                    </li>
+                    <li class="treeview" id="">
+                        <a th:href="@{/orders/toOrdersPage}"
+                           href=""
+                           target="menuFrame">
+                            <i class="glyphicon glyphicon-shopping-cart">
+                            </i>
+                            <span>订单管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </section>
+
+    </aside>
+    <div class="content-wrapper" id="leftContenWrapper">
+        <section class="content" style="padding: 0;">
+            <iframe id="menuFrame" class="embed-responsive-item" name="menuFrame"
+                    th:src="@{/shareBasicController/toWelcomePage}"
+                    src="${pageContext.request.contextPath}/shareBasicController/toWelcomePage.do" frameborder="0"
+                    onload="iframeHight()" allowfullscreen></iframe>
+        </section>
+    </div>
+</div>
+
+
+<!-- 通用弹窗 sm-->
+<div class="modal fade" id="tips_dialog_sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog mc-dialog-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" align="center" id="tips_dialog_title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="tips_dialog_content" class="text-center" style="color: #666666"></div>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn btn-info tips_dialog_button" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 修改密码弹窗 -->
+<div class="modal fade" id="editPwdView" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 10%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title text-center">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="addInputs" style="width: 100%;">
+                    <div class="inputs">
+                        <span class="text-color-999">原始密码</span>
+                        <input id="oldPassword" type="password" class="form-control" placeholder="请输入原始密码">
+                    </div>
+                    <div class="inputs">
+                        <span class="text-color-999">新密码</span>
+                        <input id="newPassword" type="password" class="form-control" placeholder="请输入6~16位与原密码不同的新密码">
+                    </div>
+                    <div class="inputs">
+                        <span class="text-color-999">确认新密码</span>
+                        <input id="newPassword2" type="password" class="form-control" placeholder="请再次输入新密码">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" class="btn btn-info" onclick="savePwd()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/static/dist/jquery/ui.js}" src="dist/jquery/ui.js"></script>
+<script th:src="@{/static/dist/bootstrap/bootstrap.min.js}" src="dist/bootstrap/bootstrap.min.js"></script>
+<script th:src="@{/static/dist/bootstrap/checkbix.min.js}" src="dist/bootstrap/checkbix.min.js"></script>
+<script th:src="@{/static/dist/jquery/jquery.combo.select.js}" src="dist/jquery/jquery.combo.select.js"></script>
+<script th:src="@{/static/dist/adminlte/adminlte.min.js}" src="dist/adminlte/adminlte.min.js"></script>
+<script th:src="@{/static/mcfish/js/mcfish.js}" src="mcfish/js/mcfish.js"></script>
+<script th:src="@{/static/mcfish/js/index.js}" src="mcfish/js/index.js"></script>
+</body>
+
+</html>

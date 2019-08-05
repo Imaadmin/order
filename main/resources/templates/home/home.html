@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>平台首页</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="/static/dist/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/dist/fonts/ionicons.min.css">
+		<link rel="stylesheet" href="/static/dist/jquery/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="/static/dist/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/dist/adminlte/AdminLTE.css">
+		<link rel="stylesheet" href="/static/dist/adminlte/skin-mcblue.css">
+		<link rel="stylesheet" href="/static/dist/morris/morris.css">
+		<link rel="stylesheet" href="/static/mcfish/css/mcfish.css">
+	</head>
+
+	<body class="hold-transition skin-blue sidebar-mini mc_body">
+		<div class="wrapper">
+			<div class="content-wrapper" style="margin-left: 0;padding-bottom: 10px">
+				<section class="content no-padding">
+					<div class="box box-default">
+						<div class="box-header" style="line-height: 45px;">
+							<h3 class="box-title text-blue box-header-text">平台首页</h3>
+						</div>
+						<div class="box-body table-responsive home-body" style="padding-top: 2%;">
+							
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-aqua">
+										<i class="fa fa-cubes"></i>
+									</span>
+									<div class="info-box-content">
+										<span class="info-box-text">用户注册数</span>
+										<a th:href="@{/user/toUserPage}" href="${pageContext.request.contextPath}/shareUserController/UserPage.do">
+											<span class="info-box-number" id="totalUsers" style="font-size: 22px;"></span>
+										</a>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-green">
+										<i class="fa fa-mail-forward"></i>
+									</span>
+									<div class="info-box-content">
+										<span class="info-box-text">菜品数</span>
+										<a th:href="@{/variety/toVarietyPage}" >
+											<span class="info-box-number" id="totalEquipment" style="font-size: 22px;"></span>
+										</a>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-yellow">
+										<i class="fa fa-google-wallet"></i>
+									</span>
+									<div class="info-box-content">
+										<span class="info-box-text">订单数</span>
+										<a th:href="@{/orders/toOrdersPage}" href="${pageContext.request.contextPath}/shareAdvertisementController/AdvertisementPage.do">
+											<span class="info-box-number" id="totalOrder" style="font-size: 22px;"></span>
+										</a>
+									</div>
+								</div>
+							</div>							
+
+							<div class="col-md-6 col-lg-6 col-xs-12">
+								<div class="home-title">
+									<font size="5px" color="red">用户总数:</font>
+									<font id="totalUsers" size="5px;"></font>
+								</div>
+								
+								<div class="box box-info">
+									<div class="box-header with-border">
+										<h3 class="box-title">每月用户数</h3>&nbsp;&nbsp;&nbsp;&nbsp;
+									</div>
+									<div class="box-body chart-responsive">
+										<div class="chart" id="user-chart" style="height: 400px;"></div>
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="col-md-6 col-lg-6 col-xs-12">
+								<div class="home-title">
+									<font size="5px" color="red">订单总数</font>
+								</div>
+								
+								<div class="box box-info">
+									<div class="box-header with-border">
+										<h3 class="box-title">每月订单数</h3>
+									</div>
+									<div class="box-body chart-responsive">
+										<div class="chart" id="line-chart1" style="height: 400px;"></div>
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<script src="/static/dist/jquery/jquery.min.js"></script>
+		<script src="/static/dist/bootstrap/bootstrap.min.js"></script>
+		<script src="/static/dist/adminlte/adminlte.min.js"></script>
+		<script src="/static/dist/morris/morris.min.js"></script>
+		<script src="/static/dist/echarts/echarts.min.js"></script>
+		<script src="/static/dist/jquery/ui.js"></script>
+		<script src="/static/mcfish/js/mcfish.js"></script>
+		<script src="/static/mcfish/js/home/home.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+/********************************
+A jQuery plugin for search hints
+
+Author: Lorenzo Cioni 
+https://github.com/lorecioni
+********************************/
+.autocomplete-container {
+	position: relative;
+}
+.autocomplete-container input{padding: 15px;border: 1px solid #ccc;padding-left: 10px;}
+
+.proposal-box {
+	position: absolute;
+	border-bottom: 0;
+	left: 0px;
+	z-index: 99;
+}
+
+.proposal-list {
+	list-style: none;
+	display:none; 
+	height: 212px;
+	width: 110px;
+	overflow:auto;
+	background-color: #FFFFFF;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0);
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+	border: 1px solid #ccc;
+	border-top: 0
+}
+.proposal-list::-webkit-scrollbar {width: 4px; height: 1px;}
+.proposal-list::-webkit-scrollbar-thumb {border-radius: 10px;-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);background: #cccccc;}
+.proposal-list::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);border-radius: 10px;background: #ffffff;}
+
+.proposal-list li {
+	text-align: left;
+	padding: 5px;
+	padding-left: 10px;
+	font-family: inherit;
+	border-bottom: 1px solid #ccc;
+	height: 30px;
+	padding-top: 0;
+	line-height: 30px;
+	cursor: pointer;
+}
+.proposal-list li:last-child{
+	border: 0
+}
+
+
+li.proposal.selected {
+	background-color: #3c8dbc;
+	color: white;
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrdersMapper">
+
+
+	<!-- 根据条件获取所有报名课程 -->
+	<select id="getOrderList" parameterType="pd" resultType="com.example.order.entities.UserOrder">
+		select
+		a.*,
+		b.phone,
+		(
+		select
+		count(id)
+		from
+		tb_orders
+		<where>
+			<if test="state != null and state != ''">
+				and state = #{state}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				and (order_oid like CONCAT('%',#{keyword},'%'))
+			</if>
+		</where>
+		order by create_time desc
+		) as totalPage
+		from
+		tb_orders as a left join tb_user as b on a.user_id = b.id
+		<where>
+			<if test="state != null and state != ''">
+				and a.state = #{state}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				and (a.order_oid like CONCAT('%',#{keyword},'%'))
+			</if>
+		</where>
+		order by a.create_time desc
+		<if test="length != null  and length!='' and length != -1">
+			limit #{start},#{length}
+		</if>
+	</select>
+
+
+	<!-- 根据oid获取订单详情信息 -->
+	<select id="getOrderInfoList" parameterType="int" resultType="com.example.order.entities.OrdersInfo">
+		select
+		a.*,
+		b.variety_name as varietyName,
+		(
+		select
+		count(id)
+		from
+		tb_order_item
+		where
+			order_oid = #{oid}
+		order by create_time desc
+		) as total
+		from
+		tb_order_item as a left join tb_variety as b on a.variety_id = b.id
+		where
+			a.order_oid = #{oid}
+		order by a.create_time desc
+		<if test="length != null  and length!='' and length != -1">
+			limit #{start},#{length}
+		</if>
+
+	</select>
+
+
+
+
+</mapper>

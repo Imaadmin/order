@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BannerMapper" >
+	
+	<!-- 添加优惠券  -->
+	<insert id="addCoupon" parameterType="pd">
+		insert into tb_banner
+			(banner_img,  contents, banner_url,  `state`,create_time)
+		values
+			( #{image},  #{brief}, #{url},   #{status},   #{create_time})
+	</insert>
+
+	
+	<!-- 获取所有优惠券 -->
+	<select id="getAllCoupons" parameterType="pd" resultType="com.example.order.entities.Banner">
+		select 
+			*,
+			(
+				select 
+					count(id)
+				from
+					tb_banner
+				<where>
+					<if test="status != null and status != ''">
+						and state = #{status}
+					</if>
+					<if test="keyword != null and keyword != ''">
+						and (id like CONCAT('%',#{keyword},'%') or contents like CONCAT('%',#{keyword},'%'))
+					</if>
+				</where>
+				order by create_time desc
+			) as total
+		from
+			tb_banner
+		<where>
+			<if test="status != null and status != ''">
+				and state = #{status}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				and (id like CONCAT('%',#{keyword},'%') or contents like CONCAT('%',#{keyword},'%'))
+			</if>
+		</where>
+		order by create_time desc
+		<if test="length != null  and length!='' and length != -1">
+		    limit #{start},#{length}
+		</if>	
+		
+	</select>
+	
+	
+	<!-- 删除优惠券 -->
+	<delete id="deleteCoupon" parameterType="pd">
+		delete 
+		from 
+			tb_banner
+		where 
+			id = #{id}
+	</delete>
+	
+	
+	<!-- 查询优惠券详情 -->
+	<select id="getCouponInfo" parameterType="pd" resultType="com.example.order.entities.Banner">
+		select 
+			*
+		from
+			tb_banner
+		where
+			id = #{id}
+	</select>
+	
+	
+	<!-- 更新优惠券 -->
+	<update id="updateCoupon"  parameterType="pd">
+		update
+		tb_banner
+		<trim prefix="set" suffixOverrides="," >
+
+			<if test="image != null and image != ''">
+				banner_img = #{image},
+			</if>
+			<if test="brief != null and brief != ''">
+				contents = #{brief},
+			</if>
+			<if test="url != null and url != ''">
+				banner_url = #{url},
+			</if>
+			<if test="status != null and status != ''">
+				state = #{status},
+			</if>
+		</trim>
+		where 
+			id = #{id}
+	</update>
+</mapper>

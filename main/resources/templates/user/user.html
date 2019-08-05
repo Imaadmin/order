@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户管理</title>
+    <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+            name="viewport">
+    <link rel="stylesheet" th:href="@{/static/dist/jquery/dataTables.bootstrap.min.css}"
+          href="../dist/jquery/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/dist/bootstrap/bootstrap.min.css}" href="../dist/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/dist/adminlte/AdminLTE.css}" href="../dist/adminlte/AdminLTE.css">
+    <link rel="stylesheet" th:href="@{/static/dist/adminlte/skin-mcblue.css}" href="../dist/adminlte/skin-mcblue.css">
+    <link rel="stylesheet" th:href="@{/static/mcfish/css/mcfish.css}" href="../mcfish/css/mcfish.css">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini mc_body">
+<div class="wrapper">
+    <div class="content-wrapper"
+         style="margin-left: 0; padding-bottom: 10px">
+        <section class="content no-padding">
+            <div class="box box-default">
+                <div class="box-header" style="line-height: 45px;">
+                    <h3 class="box-title text-blue box-header-text">用户管理</h3>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <div class="nav-tabs-custom no-shadow">
+                        <ul class="nav nav-tabs">
+                            <li class="active" onclick="getUserList();"><a href="#tab_1" data-toggle="tab" aria-expanded="false" class="pad10">用户管理</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="box-header" style="line-height: 45px;">
+                                    <div class="form-inline" style="margin: 10px 0 0 0;">
+                                        <div class="form-group">
+                                            <input type="text" id="deviceFlag" class="form-control"
+                                                   placeholder="根据用户手机号搜索" style="width: 240px;"
+                                                   oninput="search(1,this)"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn  btn-info" onclick="search(1,'#basicFlag');">搜索</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body table-responsive">
+                                    <table id="userList" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>头像</th>
+                                            <th>手机号</th>
+                                            <th>添加时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<script th:src="@{/static/dist/jquery/jquery.min.js}" src="../dist/jquery/jquery.min.js"></script>
+<script th:src="@{/static/dist/bootstrap/bootstrap.min.js}" src="../dist/bootstrap/bootstrap.min.js"></script>
+<script th:src="@{/static/dist/adminlte/adminlte.min.js}" src="../dist/adminlte/adminlte.min.js"></script>
+<script th:src="@{/static/dist/jquery/jquery.dataTables.js}" src="../dist/jquery/jquery.dataTables.js"></script>
+<script th:src="@{/static/dist/jquery/ui.js}" src="../dist/jquery/ui.js"></script>
+<script th:src="@{/static/mcfish/js/mcfish.js}" src="../mcfish/js/mcfish.js"></script>
+<script th:src="@{/static/mcfish/js/user/user.js}" src="../mcfish/js/user/user.js"></script>
+</body>
+
+</html>

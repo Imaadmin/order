@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>菜品管理</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" th:href="@{/static/dist/jquery/dataTables.bootstrap.min.css}"
+          href="../dist/jquery/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/dist/bootstrap/bootstrap.min.css}" href="../dist/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/dist/adminlte/AdminLTE.css}" href="../dist/adminlte/AdminLTE.css">
+    <link rel="stylesheet" th:href="@{/static/dist/adminlte/skin-mcblue.css}" href="../dist/adminlte/skin-mcblue.css">
+    <link rel="stylesheet" th:href="@{/static/mcfish/css/mcfish.css}" href="../mcfish/css/mcfish.css">
+    <link rel="stylesheet" th:href="@{/static/dist/jquery/caldate/caldate.css}" href="../dist/jquery/caldate/caldate.css">
+    <link rel="stylesheet" th:href="@{/static/dist/datetimepicker/jquery.datetimepicker.css}"
+          href="../dist/datetimepicker/jquery.datetimepicker.css">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini mc_body">
+<div class="wrapper">
+    <div class="content-wrapper" style="margin-left: 0;">
+        <section class="content no-padding">
+            <div class="box box-default">
+                <div class="box-header" style="line-height: 45px;">
+                    <h3 class="box-title text-blue box-header-text">菜品管理</h3>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <div class="nav-tabs-custom no-shadow">
+                        <ul class="nav nav-tabs">
+                            <li class="active" onclick="getCourseList();">
+                                <a href="#tab_1" data-toggle="tab" aria-expanded="false" class="pad10">菜品列表</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- 菜品列表 -->
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="box no-border no-shadow no-padding">
+                                    <div class="box-header" style="line-height: 45px;">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <label class="text-color-999">分类:</label>
+                                                <select id="categoryId" class="form-control" onchange="getVarietyList();">
+                                                    <option value="">请选择分类</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="messageFlag" class="form-control" placeholder="菜品名搜索" style="width: 240px;" oninput="search(this)" />
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn  btn-info" onclick="search('#messageFlag');">查找</button>
+                                            </div>
+                                            <div class="form-group pull-right">
+                                                <button class="btn  btn-info" onclick="addVariety();">新增</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-body table-responsive">
+                                        <table id="VarietyList" class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>图片</th>
+                                                <th>菜品名</th>
+                                                <th>分类</th>
+                                                <th>介绍</th>
+                                                <th>价格</th>
+                                                <th>添加时间</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<!-- 编辑/添加弹窗 -->
+<div class="modal fade" id="AddVarietyView" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 10%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title text-center" id="couponBoxTitle">添加菜品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="addInputs" style="width: 100%;">
+                    <div class="inputs">
+                        <span class="text-color-999">菜品名：</span>
+                        <input id="varietyName" class="form-control">
+                    </div>
+                    <div class="inputs">
+                        <span class="text-color-999">课程分类：</span>
+                        <select class="form-control" id="category">
+                        </select>
+                    </div>
+                    <div class="inputs">
+                        <span class="text-color-999">介绍：</span>
+                        <input id="contents" class="form-control" placeholder="菜品介绍">
+                    </div>
+                    <div class="inputs">
+                        <span class="text-color-999">价格：</span>
+                        <input id="price" class="form-control" placeholder="人民币为单位">
+                    </div>
+
+                    <div class="inputs">
+                        <span class="text-color-999">图片：</span>
+                        <div>
+                            <div class="uploadImg">
+                                <img id="varietyIcon"
+                                     src="http://wx.qlogo.cn/mmopen/vi_32/nrZwlTIgnN95WrbOdcJHYfGR6PqAd3NEVNevWIlADOibM8ojK51moJcgUyia8lcUmOVk8PkliaA3V9jBfemicdJQOA/0">
+                                <p>
+											<span>
+												<a href="javascript:;" id="pickfiles" class="file">
+													选择文件
+						 							<input type="file" name="picUrl" id="picUrl"
+                                                           class="btn btn-primary">
+						                        </a>
+					 							<button id="deleteImg1" class="btn btn-default">删除</button>
+											</span>
+                                    <font>仅限png、jpg格式图片</font>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="updatabtn" class="btn btn-info">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/dist/jquery/jquery.min.js}" src="../dist/jquery/jquery.min.js"></script>
+<script th:src="@{/static/dist/bootstrap/bootstrap.min.js}" src="../dist/bootstrap/bootstrap.min.js"></script>
+<script th:src="@{/static/dist/adminlte/adminlte.min.js}" src="../dist/adminlte/adminlte.min.js"></script>
+<script th:src="@{/static/dist/address/area.js}" src="../dist/address/area.js"></script>
+<script th:src="@{/static/dist/address/select.js}" src="../dist/address/select.js"></script>
+<script th:src="@{/static/dist/jquery/jquery.dataTables.js}" src="../dist/jquery/jquery.dataTables.js"></script>
+<script th:src="@{/static/dist/datetimepicker/jquery.datetimepicker.full.js}"
+        src="../dist/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script th:src="@{/static/dist/jquery/ui.js}" src="../dist/jquery/ui.js"></script>
+<script th:src="@{/static/mcfish/js/mcfish.js}" src="../mcfish/js/mcfish.js"></script>
+<script th:src="@{/static/mcfish/js/variety/variety.js}" src="../mcfish/js/course/course.js"></script>
+</body>
+
+</html>

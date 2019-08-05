@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VarietyMapper">
+
+
+    <!-- 根据条件获取所有收费信息 -->
+    <select id="getVarietyList" parameterType="pd" resultType="com.example.order.entities.Variety">
+        select
+        a.*,
+        b.category_name as categoryName,
+        (
+        select
+        count(id)
+        from
+        tb_variety
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                and categoryId = #{categoryId}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (variety_name like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by create_time desc
+        ) as total
+        from
+        tb_variety as a
+        left join tb_category as b on a.categoryId = b.id
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                and categoryId = #{categoryId}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                and (variety_name like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by create_time desc
+        <if test="length != null  and length!='' and length != -1">
+            limit #{start},#{length}
+        </if>
+    </select>
+
+
+    <!-- 添加菜品 -->
+    <insert id="addVariety" parameterType="pd">
+        insert into
+        tb_variety
+        (url, categoryId, create_time, variety_name, contents,price)
+        VALUES
+        (#{url} , #{cid}, #{create_time}, #{varietyName}, #{contents}, #{price})
+    </insert>
+</mapper>

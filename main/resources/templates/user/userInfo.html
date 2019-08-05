@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户订单详情</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" th:href="@{/static/dist/jquery/dataTables.bootstrap.min.css}"
+          href="../dist/jquery/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/dist/bootstrap/bootstrap.min.css}" href="../dist/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/ddist/adminlte/AdminLTE.css}" href="../dist/adminlte/AdminLTE.css">
+    <link rel="stylesheet" th:href="@{/static/dist/adminlte/skin-mcblue.css}" href="../dist/adminlte/skin-mcblue.css">
+    <link rel="stylesheet" th:href="@{/static/dist/jquery/caldate/caldate.css}" href="../dist/jquery/caldate/caldate.css">
+    <link rel="stylesheet" th:href="@{/static/dist/datetimepicker/jquery.datetimepicker.css}"
+          href="../dist/datetimepicker/jquery.datetimepicker.css">
+    <link rel="stylesheet" th:href="@{/static/mcfish/css/mcfish.css}" href="../mcfish/css/mcfish.css">
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini mc_body" bgcolor="#faebd7">
+<div class="wrapper bg-color-white">
+    <div class="content-wrapper" style="margin-left: 0;padding-bottom: 10px">
+        <section class="content-header bg-color-white">
+            <ol class="mcbreadcrumb breadcrumb">
+                <li><a th:href="@{/user/toUserPage}"
+                       href="${pageContext.request.contextPath}/shareAgentController/AgentPage.do" target="menuFrame"><i
+                        class="fa fa-dashboard"></i>用户列表</a></li>
+                <li class="active">用户订单详情</li>
+            </ol>
+        </section>
+        <section class="content no-padding">
+            <div class="box box-default">
+                <div class="box-body table-responsive no-padding">
+                    <div class="nav-tabs-custom no-shadow">
+                        <ul class="nav nav-tabs">
+                            <li class="active" onclick="getUserInfo();">
+                                <a href="#tab_1" data-toggle="tab" aria-expanded="false" class="pad10">用户订单详情</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- 基本资料 -->
+                            <div class="tab-pane active" id="tab_1">
+                                <div class="box no-border no-shadow">
+                                    <div class="box-body table-responsive no-padding">
+                                        <div class="info-container">
+                                            <div class="info-container_left">
+                                                <div class="item">
+                                                    <div class="item_left">
+                                                        <span>手机号：</span>
+                                                    </div>
+                                                    <div class="item_right">
+                                                        <div id="info-phone"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info-container_right">
+
+                                            </div>
+
+                                            <div class="item">
+                                                <div class="item_left">
+                                                    <span>订单列表：</span>
+                                                </div>
+                                            </div>
+                                            <div class="box-body table-responsive">
+                                                <table id="userOrderList" class="table table-bordered table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>订单号</th>
+                                                        <th>金额</th>
+                                                        <th>订单状态</th>
+                                                        <th>操作时间</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script th:src="@{/static/dist/jquery/jquery.min.js}" src="../dist/jquery/jquery.min.js"></script>
+<script th:src="@{/static/dist/bootstrap/bootstrap.min.js}" src="../dist/bootstrap/bootstrap.min.js"></script>
+<script th:src="@{/static/dist/adminlte/adminlte.min.js}" src="../dist/adminlte/adminlte.min.js"></script>
+<script th:src="@{/static/dist/jquery/jquery.dataTables.js}" src="../dist/jquery/jquery.dataTables.js"></script>
+<script th:src="@{/static/dist/datetimepicker/jquery.datetimepicker.full.js}"
+        src="../dist/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script th:src="@{/static/dist/jquery/ui.js}" src="../dist/jquery/ui.js"></script>
+<script th:src="@{/static/dist/jquery/caldate/caldate.js}" src="../dist/jquery/caldate/caldate.js"></script>
+<script th:src="@{/static/mcfish/js/mcfish.js}" src="../mcfish/js/mcfish.js"></script>
+<script th:src="@{/static/mcfish/js/user/userInfo.js}" src="../mcfish/js/agent/agentInfo.js"></script>
+</body>
+</html>

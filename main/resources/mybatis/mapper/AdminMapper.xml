@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminMapper">
+
+    <select id="findAdminByUsername" resultType="com.example.order.entities.Admin">
+        SELECT * FROM tb_admin WHERE username = #{username}
+    </select>
+
+    <update id="updatePwd" parameterType="pd">
+        UPDATE
+        tb_admin
+        SET
+        password = #{newPassword}
+        WHERE
+        id = #{uid}
+    </update>
+</mapper>
