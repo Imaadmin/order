@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class BannerController extends BaseController {
 	public Object addCoupon() throws Exception{
 		PageData pd=this.getPageData();
 
+		//调用添加banner图的方法
 		bannerService.addCoupon(pd);
-		
 		return InterfaceResult.returnSuccess(null);
 	}
 
@@ -51,7 +50,7 @@ public class BannerController extends BaseController {
 		PageData pd = this.getPageData();
 		
 	    List<Banner> couponns= bannerService.getAllCoupons(pd);
-	    Long total = couponns.size() == 0 ? 0l: couponns.get(0).getTotal();
+	    Long total = couponns.size() == 0 ? 0L : couponns.get(0).getTotal();
 	    
 		return InterfaceResult.returnTableSuccess(couponns, total, pd.get("draw"));
 	}

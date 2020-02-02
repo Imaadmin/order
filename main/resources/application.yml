@@ -1,10 +1,10 @@
 spring:
   datasource:
 #   数据源基本配置
-    username: ordering
+    username: studentShop
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://123.207.228.185/ordering?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://49.235.151.230/studentShop?characterEncoding=utf-8
     type: com.alibaba.druid.pool.DruidDataSource
 #   数据源其他配置
     initialSize: 5
@@ -47,6 +47,6 @@ mybatis:
 server:
   tomcat:
     max-threads: 1000
-  port: 8080
+  port: 8090
 
 

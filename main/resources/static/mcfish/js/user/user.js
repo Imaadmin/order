@@ -1,13 +1,13 @@
-const $tools = mcfish.Tools
-const $api = mcfish.API
-const myurl = $tools.parseURL(window.location.href)
-const tableFlag = parseInt(myurl.params['tableFlag'])
+const $tools = mcfish.Tools;
+const $api = mcfish.API;
+const myurl = $tools.parseURL(window.location.href);
+const tableFlag = parseInt(myurl.params['tableFlag']);
 
 
 $(function(){
 	//获取用户列表
     getUserList();
-})
+});
 
 
 
@@ -26,7 +26,7 @@ function getUserList(){
         searching:true,
         data: {
         }
-    }
+    };
     var colData = [
         {"data" : "head",'sClass' : "text-center col-width-100",
             "render": function ( data, type, full, meta ) {
@@ -51,7 +51,7 @@ function getUserList(){
                 return str;
             }
         },
-    ]
+    ];
     UserTable = $api.getDataTable('#userList',ajaxParams, colData);
 }
 

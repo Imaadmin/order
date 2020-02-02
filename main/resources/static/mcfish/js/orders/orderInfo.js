@@ -1,13 +1,13 @@
-const $tools = mcfish.Tools
-const $api = mcfish.API
-const myurl = $tools.parseURL(window.location.href)
-const oid = myurl.params['oid']
+const $tools = mcfish.Tools;
+const $api = mcfish.API;
+const myurl = $tools.parseURL(window.location.href);
+const oid = myurl.params['oid'];
 
 $(function () {
     //获取订单详细信息
     $("#info-id").html(oid);
     getOrderInfoList();
-})
+});
 
 
 
@@ -22,7 +22,7 @@ function getOrderInfoList() {
         data: {
             oid: oid,
         }
-    }
+    };
     var colData = [
         {"data": "varietyName", 'sClass': "text-left col-width-160"},
         {"data": "subtotal", 'sClass': "text-left col-width-160",
@@ -37,7 +37,7 @@ function getOrderInfoList() {
             }
         },
 
-    ]
+    ];
     Usertable = $api.getDataTable('#userOrderList', ajaxParams, colData);
 }
 

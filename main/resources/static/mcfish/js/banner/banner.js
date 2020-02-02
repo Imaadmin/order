@@ -10,11 +10,11 @@ $(function(){
         var file = $(this)[0].files[0];
 
         if (!file) {
-            mizhu.toast('上传文件不能为空')
+            mizhu.toast('上传文件不能为空');
             return
         }
         if (!$tools.fileTypeJudge(file, ["jpg", "png", "jpeg"])) {
-            mizhu.toast('请上传正确格式的文档')
+            mizhu.toast('请上传正确格式的文档');
             return
         }
 
@@ -32,7 +32,7 @@ $(function(){
         $("#actionCouponImg").attr("src", "");
         $("#picUrl").val("");
     });
-})
+});
 
 
 /**
@@ -49,7 +49,7 @@ function getCouponList(){
 			data		: {
 							status :status
 						}
-	 }
+	 };
 	 var colData = [
 	 				{"data" : "bannerImg",'sClass' : "text-center col-width-120",
 	 					"render" : function(data, type, full, meta) {
@@ -86,11 +86,11 @@ function getCouponList(){
 							}else{
 								str += "<span class='tab_text_blue pointer' onclick=updateCouponStatus(" + data +",0);>下线</span>&nbsp;&nbsp;";
 							}
-							str += "<span class='tab_text_blue pointer' onclick=delCoupon(" + data +");>删除</span>"
+							str += "<span class='tab_text_blue pointer' onclick=delCoupon(" + data +");>删除</span>";
 							return str;
 						}
 					},
-				]
+				];
 	couponTable = $api.getDataTable('#couponList',ajaxParams, colData);
 }
 
@@ -195,7 +195,7 @@ function comfirmSaveCoupon(id){
 		brief	: brief,
 		url		: url,
 		status	: status
-	}
+	};
 	
 	var url = "addCoupon";
 	

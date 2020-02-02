@@ -49,7 +49,7 @@ honeySwitch.init = function() {
 				}
 			}
 		});
-	}
+	};
 	if (this.themeColor) {
 		var c = this.themeColor;
 		$(".switch-on").css({
@@ -100,7 +100,7 @@ honeySwitch.showOn = function(ele) {
 			'background-color' : c2
 		});
 	}
-}
+};
 honeySwitch.showOff = function(ele) {
 	$(ele).removeClass("switch-on").addClass("switch-off");
 	$(".switch-off").css({
@@ -108,7 +108,7 @@ honeySwitch.showOff = function(ele) {
 		'box-shadow' : 'rgb(223, 223, 223) 0px 0px 0px 0px inset',
 		'background-color' : 'rgb(255, 255, 255)'
 	});
-}
+};
 $(function() {
 	honeySwitch.init();
 }); 

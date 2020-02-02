@@ -22,7 +22,7 @@ function removeEle(ele) {
 
 var provinceText, cityText, cityItem;
 province.on("change", function () {
-    var option = $("#province option:selected")
+    var option = $("#province option:selected");
     provinceText = option.text();
     $.each(provinceList, function (i, item) {
         var array = item.name.split(",");
@@ -40,7 +40,7 @@ province.on("change", function () {
 city.on("change", function () {
     $("#newR").show();			//新建电子围栏信息选择了省/市就要显示新建电子围栏按钮
     $("#newC").show();
-    var option = $("#city option:selected")
+    var option = $("#city option:selected");
     cityText = option.text();
     removeEle(town);
     $.each(provinceList, function (i, item) {

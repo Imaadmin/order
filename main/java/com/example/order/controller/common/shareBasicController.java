@@ -76,7 +76,7 @@ public class shareBasicController {
      * 跳转到订单管理页面
      */
     @RequestMapping(value = "/orders/toOrdersPage")
-    public String toOrdersPage() throws Exception {
+    public String toOrdersPage() {
         return "orders/orders";
     }
 

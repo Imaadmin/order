@@ -43,12 +43,35 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
 
-    //新增分类
+    //新增父分类
     @Override
     public void addCategory(PageData pd) throws Exception {
         Date now = new Date();
         pd.put("create_time", now);
         dao.save("CategoriesMapper.addCategory", pd);
+    }
+
+
+    //查找是否有子分类
+    @Override
+    public List<Category> selectChildren(PageData pd) throws Exception {
+        return (List<Category>)dao.findForList("CategoriesMapper.selectChildren",pd);
+    }
+
+
+    //获取父分类列表
+    @Override
+    public List<Category> getAllFatherCategories(PageData pd) throws Exception{
+        return (List<Category>) dao.findForList("CategoriesMapper.getAllFatherCategories", pd);
+    }
+
+
+    //新增子分类
+    @Override
+    public void addSunCategory(PageData pd) throws Exception{
+        Date now = new Date();
+        pd.put("create_time", now);
+        dao.save("CategoriesMapper.addSunCategory", pd);
     }
 }
 

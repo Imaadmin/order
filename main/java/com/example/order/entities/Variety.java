@@ -16,12 +16,21 @@ public class Variety {
     private String varietyName;              //菜品名
     private String contents;                  //介绍
     private double price;                     //价格
+    private int count;                     //数量
     private String url;                       //图片地址
     private Date createTime;                  //添加时间
 
     private String categoryName;              //分类名
 
     private Long total;                       //统计数量时使用
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public int getId() {
         return id;

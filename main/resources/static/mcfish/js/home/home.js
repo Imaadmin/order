@@ -1,5 +1,5 @@
-const $tools = mcfish.Tools
-const $api = mcfish.API
+const $tools = mcfish.Tools;
+const $api = mcfish.API;
 
 
 var sdata = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -20,7 +20,7 @@ $(function(){
 	//订单曲线图
 	getOrderEveryday();
 
-})
+});
 
 
 /**

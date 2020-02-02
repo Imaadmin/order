@@ -10,10 +10,19 @@ import java.util.Date;
 @Table(name = "tb_category")
 public class Category {
     private Integer id;
+    private String fatherCategoryName;
     @Column(name = "category_name")
     private String categoryName;
     private Date createTime;
     private Long total;
+
+    public String getFatherCategoryName() {
+        return fatherCategoryName;
+    }
+
+    public void setFatherCategoryName(String fatherCategoryName) {
+        this.fatherCategoryName = fatherCategoryName;
+    }
 
     public Long getTotal() {
         return total;

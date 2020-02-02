@@ -16,11 +16,20 @@ public class UserOrder {
     private int userId;              //用户id
     private int state;                //订单状态
     private Date createTime;          //添加时间
+    private String address;            //送货地址
     private double total;               //金额
 
     private String phone;             //手机号
 
     private Long totalPage;               //统计数量时使用
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getPhone() {
         return phone;

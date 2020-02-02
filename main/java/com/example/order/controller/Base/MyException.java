@@ -31,7 +31,8 @@ public class MyException extends Exception implements Serializable{
     }  
   
   
-    public String getMessage() {  
+    @Override
+    public String getMessage() {
         return message;  
     }   
     public void setMessage(String message) {  

@@ -1,5 +1,5 @@
 $(function () {
-    var dateStr = '<div class="date-list"><div class="header clearfix"><div class="header-left fl">&lt;</div><div class="fl date-sel"><select class="year"></select></div><div class="fl date-sel"><select class="month"><option value="1">1月</option><option value="2">2月</option><option value="3">3月</option><option value="4">4月</option><option value="5">5月</option><option value="6">6月</option><option value="7">7月</option><option value="8">8月</option><option value="9">9月</option><option value="10">10月</option><option value="11">11月</option><option value="12">12月</option></select></div><div class="header-right fl">&gt;</div><div class="fr today">今日</div></div><table><thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>'
+    var dateStr = '<div class="date-list"><div class="header clearfix"><div class="header-left fl">&lt;</div><div class="fl date-sel"><select class="year"></select></div><div class="fl date-sel"><select class="month"><option value="1">1月</option><option value="2">2月</option><option value="3">3月</option><option value="4">4月</option><option value="5">5月</option><option value="6">6月</option><option value="7">7月</option><option value="8">8月</option><option value="9">9月</option><option value="10">10月</option><option value="11">11月</option><option value="12">12月</option></select></div><div class="header-right fl">&gt;</div><div class="fr today">今日</div></div><table><thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>';
     $(dateStr).appendTo($(".date"));
     var $y = $(".year"), $m = $(".month"),
         $year = $y.val(),
@@ -167,7 +167,7 @@ $(function () {
             }
         }
         actTd($(this), d_year, d_month);
-    })
+    });
 
     function actTd($this, y, m) {
         var reg = /^(\d{4})(-|\\|\/|)(\d{1,2})(-|\\|\/|)(\d{1,2})$/,
@@ -229,4 +229,4 @@ $(function () {
     document.body.onselectstart = document.body.ondrag = function () {
         return 1;
     }
-})
+});

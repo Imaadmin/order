@@ -8,21 +8,17 @@ import com.example.order.entities.Variety;
 import com.example.order.service.CategoriesService;
 import com.example.order.service.VarietyService;
 import com.example.order.util.FileUpdate;
-import com.example.order.util.FtpFileUtil;
 import com.example.order.util.PageData;
 import com.example.order.util.SpringBeansUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * 菜品管理
+ * 商品管理
  * @author 李磊
  * @version 1.0
  */
@@ -40,13 +36,13 @@ public class VarietyController extends BaseController {
 
 
 	/**
-	 *获取菜品列表
+	 *获取商品列表
 	 */
 	@RequestMapping("/variety/getVarietyList")
 	public Object getVarietyList() throws Exception {
 		PageData pd = this.getPageData();
 		List<Variety> list = varietyService.getVarietyList(pd);
-		Long recordsTotal = list.size() == 0 ? 0l:list.get(0).getTotal();
+		Long recordsTotal = list.size() == 0 ? 0L :list.get(0).getTotal();
 		return InterfaceResult.returnTableSuccess(list, recordsTotal, pd.get("draw"));
 	}
 
@@ -65,13 +61,14 @@ public class VarietyController extends BaseController {
 
 
 	/**
-	 * 新增菜品
+	 * 新增商品
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping("/variety/addVariety")
 	public Object addVariety() throws Exception {
-		PageData pd = this.getPageData();
+		PageData pd=this.getPageData();
+		//调用添加商品的方法
 		varietyService.addVariety(pd);
 		return InterfaceResult.returnSuccess(null);
 	}
@@ -80,10 +77,9 @@ public class VarietyController extends BaseController {
 	/**
 	 * 图片上传
 	 * @return
-	 * @throws Exception
-	 */
+     */
 	@RequestMapping("/variety/fileUpload")
-	public Object fileUpload(MultipartFile file) throws Exception {
+	public Object fileUpload(MultipartFile file) {
 		FileUpdate fileUpdate = new FileUpdate();
 		if(file != null){
 			try {

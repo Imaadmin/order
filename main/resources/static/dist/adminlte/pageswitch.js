@@ -45,7 +45,7 @@
             // 	keyDown();
             // }
         });
-    }
+    };
 
     //滚轮向上滑动事件
     SP.moveSectionUp = function () {
@@ -59,7 +59,7 @@
 
     //滚轮向下滑动事件
     SP.moveSectionDown = function () {
-        console.log(iIndex)
+        console.log(iIndex);
         if (iIndex < (arrElement.length - 1)) {
             iIndex++;
         } else if (opts.loop) {
@@ -72,16 +72,16 @@
         if (iIndex < (arrElement.length - 1)) {
             iIndex++;
         } else {
-            alert('已经到最后一张了！')
+            alert('已经到最后一张了！');
             iIndex = 0;
         }
         scrollPage(arrElement[iIndex]);
-    }
+    };
 
     //私有方法
     //页面滚动事件
     function scrollPage(element) {
-        console.log(element)
+        console.log(element);
         var dest = element.position();
         if (typeof dest === 'undefined') {
             return;
@@ -91,7 +91,7 @@
 
     $('.click-hot').on('click', function () {
         SP.moveClick()
-    })
+    });
 
     //重写鼠标滑动事件
     // $(document).on("mousewheel DOMMouseScroll", MouseWheelHandler);

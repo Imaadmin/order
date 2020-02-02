@@ -43,7 +43,7 @@
             proposals = $('<div></div>')
                 .addClass('proposal-box')
                 .css('width', input.width)
-                .css('top', input.height)
+                .css('top', input.height);
 
             var proposalList = $('<ul></ul>')
                 .addClass('proposal-list')
@@ -55,14 +55,14 @@
                 currentSelection = -1;
                 proposalList.empty();
                 nodataShow()
-            })
+            });
             input.on("blur", function (e) { // 失焦
                 setTimeout(function () {
                     currentSelection = -1;
                     proposalList.hide();
                     proposalList.empty();
                 }, 200);
-            })
+            });
             input.keydown(function (e) {
                 switch (e.which) {
                     case 38: // Up arrow
@@ -115,7 +115,7 @@
                         nodataShow()
                     }
                 }
-            })
+            });
 
             // 定义一个现实下拉列表的函数
             function showProposals(word) {
@@ -163,7 +163,7 @@
                             input.val($(this).html());
                             proposalList.empty();
                             params.onSubmit(input.val());
-                            params.onchange($(this).data('id'), input)
+                            params.onchange($(this).data('id'), input);
                             proposalList.hide();
                             e.stopPropagation();
                             e.preventDefault();

@@ -1848,7 +1848,7 @@
                             result = true;
                             return false;
                         }
-                    })
+                    });
                     return result;
                 }
             }
@@ -5474,7 +5474,7 @@
 
                         if (item === className) {
                             hasClass = true;
-                            return;
+
                         }
 
                     });
@@ -6175,7 +6175,7 @@
                     $.each(node.attrs, function (k, v) {
 
                         node.parentNode.attrs[k] = k == 'style' ? node.parentNode.attrs[k] + v : v;
-                    })
+                    });
                     node.parentNode.removeChild(node, true);
                 }
             });
@@ -6315,7 +6315,7 @@
                     _href = 'http://' + _href;
                 }
                 a.setAttr('href', _href);
-                a.setAttr('_href')
+                a.setAttr('_href');
                 if (a.getAttr('title') == '') {
                     a.setAttr('title')
                 }
@@ -6367,7 +6367,7 @@
                         result = n;
                         return false;
                     }
-                })
+                });
                 return result;
             }
         };
@@ -6785,7 +6785,7 @@
                                 save(me);
                                 clearInterval(interalTimer)
                             }
-                        }, 300)
+                        }, 300);
                         return;
                     }
                     save(me);
@@ -7059,13 +7059,11 @@
                                         while (li.firstChild) {
                                             span.appendChild(li.firstChild)
                                         }
-                                        ;
                                         $('<p></p>').appendTo(li).append(span);
                                     } else {
                                         while (li.firstChild) {
                                             span.appendChild(li.firstChild)
                                         }
-                                        ;
                                         $(li.firstChild).append(span);
                                     }
                                 })
@@ -7189,7 +7187,6 @@
                                                 node.removeChild(node.firstChild())
                                             }
                                         }
-                                        ;
                                         break;
                                     case 'pre':
                                         node.innerText(node.innerText().replace(/&nbsp;/g, ' '))
@@ -7541,7 +7538,7 @@
                                 }
                                 break;
                         }
-                    })
+                    });
                     return result
                 }
             };
@@ -7991,7 +7988,7 @@
                         }
                         if (start === parent.lastChild)
                             evt.preventDefault();
-                        return;
+
                     }
                 }
             }
@@ -8241,7 +8238,7 @@
 
             }
 
-        })
+        });
 
 
         me.commands['clearlocaldata'] = {
@@ -8642,7 +8639,7 @@
                 if (!me.root().hasClass("edui-disabled")) {
                     me.root().toggleClass('edui-hover')
                 }
-            })
+            });
 
             return me;
         },
@@ -8675,7 +8672,7 @@
             if (state === undefined) {
                 return this.root().hasClass('edui-active')
             }
-            this.root().toggleClass('edui-active', state)
+            this.root().toggleClass('edui-active', state);
 
             return this;
         },
@@ -8720,19 +8717,19 @@
 
             fnname = fnname || 'position';
             if (this.trigger('beforeshow') === false) {
-                return;
+
             } else {
                 this.root().css($.extend({display: 'block'}, $obj ? {
                     top: $obj[fnname]().top + (dir == 'right' ? 0 : $obj.outerHeight()) - (topOffset || 0),
                     left: $obj[fnname]().left + (dir == 'right' ? $obj.outerWidth() : 0) - (leftOffset || 0)
-                } : {}))
+                } : {}));
                 this.trigger('aftershow');
             }
         },
         hide: function (all) {
             var $parentmenu;
             if (this.trigger('beforehide') === false) {
-                return;
+
             } else {
 
                 if ($parentmenu = this.root().data('parentmenu')) {
@@ -8989,7 +8986,7 @@
             this.trigger('afterhide')
         },
         attachTo: function ($obj, posObj) {
-            var me = this
+            var me = this;
             if (!$obj.data('$mergeObj')) {
                 $obj.data('$mergeObj', me.root());
                 $obj.on('wrapclick', function (evt) {
@@ -9689,7 +9686,7 @@
 
         },
         attachTo: function ($obj) {
-            var me = this
+            var me = this;
             if (!$obj.data('$mergeObj')) {
 
                 $obj.data('$mergeObj', me.root());
@@ -10625,7 +10622,7 @@
                 UM.setWidgetBody(name, $dialog, me);
                 UM.setTopEditor(me);
             }).on('afterbackdrop', function () {
-                this.$backdrop.css('zIndex', me.getOpt('zIndex') + 1).appendTo(me.$container.find('.edui-dialog-container'))
+                this.$backdrop.css('zIndex', me.getOpt('zIndex') + 1).appendTo(me.$container.find('.edui-dialog-container'));
                 $dialog.css('zIndex', me.getOpt('zIndex') + 2)
             }).on('beforeok', function () {
                 try {
@@ -11193,4 +11190,4 @@
 
     });
 
-})(jQuery)
+})(jQuery);

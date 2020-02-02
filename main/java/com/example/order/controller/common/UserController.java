@@ -34,7 +34,7 @@ public class UserController extends BaseController {
     public Object getUserList() throws Exception {
         PageData pd = this.getPageData();
         List<User> list = userserService.getUserList(pd);
-        Long recordsTotal = list.size() == 0 ? 0l : list.get(0).getTotal();
+        Long recordsTotal = list.size() == 0 ? 0L : list.get(0).getTotal();
         return InterfaceResult.returnTableSuccess(list, recordsTotal, pd.get("draw"));
     }
 
@@ -59,13 +59,13 @@ public class UserController extends BaseController {
         PageData pd = this.getPageData();
         //根据id获取用户已报名课程
         List<UserOrder> list = userserService.getUserOrderList(pd);
-        Long recordsTotal = list.size() == 0 ? 0l : list.get(0).getTotalPage();
+        Long recordsTotal = list.size() == 0 ? 0L : list.get(0).getTotalPage();
         return InterfaceResult.returnTableSuccess(list, recordsTotal, pd.get("draw"));
     }
 
 
     /**
-     * 修改用户订单状态 1未支付 2已支付未上餐 3已上餐
+     * 修改用户订单状态 1已下单 2送货中 3已完成
      *
      * @return
      * @throws Exception

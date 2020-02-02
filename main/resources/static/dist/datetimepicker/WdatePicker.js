@@ -310,7 +310,7 @@ var $dp, WdatePicker;
             if ($dp.status == 0) {
                 $dp.status = 1;
                 K({el: {innerHTML: ""}}, true)
-            } else return
+            } else
         } else if (G.eCont) {
             G.eCont = $dp.$(G.eCont);
             $dp.flatCfgs.push(G);
@@ -411,4 +411,4 @@ var $dp, WdatePicker;
             $dp.dd.style.left = F + "px"
         }
     }
-})()
+})();

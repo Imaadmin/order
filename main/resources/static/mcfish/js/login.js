@@ -1,8 +1,13 @@
 $(function () {
     checkRememBer();
 
-    mcfish.API.getSystemValue("keyValue", "POST", {});
-})
+    // mcfish.API.getSystemValue("keyValue", "POST", {});
+    // $("#project").html("校园超市");
+    // $("#indexProjectName").html("校园超市");
+    $("#logo").attr("src","http://www.jiuyect.com:4869/209037165a5e5dbd3274507b8cefd26a");
+    $("body").css("background", "url(https://img.tukuppt.com/bg_grid/00/04/41/6op62bfz3a.jpg!/fh/350)");
+    $("body").css("background-size", "cover");
+});
 
 //加载时，检测是否设置了“记住密码”
 function checkRememBer() {
@@ -13,8 +18,8 @@ function checkRememBer() {
             var userAcAndPwd = $tools.GetCookie("userAcAndPwd");
             var account = userAcAndPwd.split(",")[0];
             var password = userAcAndPwd.split(",")[1];
-            $("#account").val(account)
-            $("#password").val(password)
+            $("#account").val(account);
+            $("#password").val(password);
             $("#remFlag").attr("checked", "checked");
         }
     }
@@ -53,5 +58,5 @@ document.addEventListener('keydown', function (e) {
     if (e.keyCode == 13) {
         $("#loginBtn").trigger("click");
     }
-})
+});
 

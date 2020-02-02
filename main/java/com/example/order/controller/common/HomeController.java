@@ -6,7 +6,6 @@ import com.example.order.entities.Home;
 import com.example.order.service.HomeService;
 import com.example.order.util.PageData;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

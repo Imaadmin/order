@@ -8,7 +8,7 @@
     temp = temp.substring(temp.indexOf("/") + 1, temp.length);
     temp = href.substring(0, href.length - temp.length);
     href = temp;
-    var agentid = ''
+    var agentid = '';
     var CORPID = '';
     var mcfish = {
         /**
@@ -27,7 +27,7 @@
                 if (href != "login.html") {
                     var user = window.sessionStorage.getItem("userinfo");
                     if (!user) {
-                        setTimeout(this.comebackURL, 100)
+                        setTimeout(this.comebackURL, 100);
                         mizhu.toast("你还没有登录，系统将自动前往登录页", 100);
                     }
                 }
@@ -43,7 +43,7 @@
                         // console.log("主页面宽度:"+mainWidth);
 
                         var mainHeight = $(window).height();
-                        $('#leftMenu').css({'height': mainHeight, 'overflow-y': 'auto'})
+                        $('#leftMenu').css({'height': mainHeight, 'overflow-y': 'auto'});
                         // console.log("主页面高度:"+mainHeight);
                         return false;
                     }
@@ -286,7 +286,7 @@
                                     mizhu.toast("暂无权限", 1000);
                                     return new Array(0);
                                 } else if (result.status == 110 || result.status == 112) {
-                                    setTimeout(mcfish.Tools.comebackURL, 1000)
+                                    setTimeout(mcfish.Tools.comebackURL, 1000);
                                     mizhu.toast(result.resmsg, 1000);
                                     return new Array(0);
                                 } else {
@@ -359,7 +359,7 @@
                                     mizhu.toast("暂无权限", 1000);
                                     return new Array(0);
                                 } else if (result.status == 110 || result.status == 112) {
-                                    setTimeout(mcfish.Tools.comebackURL, 1000)
+                                    setTimeout(mcfish.Tools.comebackURL, 1000);
                                     mizhu.toast(result.resmsg, 1000);
                                     return new Array(0);
                                 } else {
@@ -398,7 +398,7 @@
             //获取登录页关键字
             getSystemValue: function (url, type, data) {
                 mcfish.API.asyncRequest(url, type, data).then(function (result) {
-                    var res = result.data
+                    var res = result.data;
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].key == "project") {
                             $("#project").html(res[i].value);
@@ -443,8 +443,8 @@
                     return false;
                 }
                 return new Promise(function (resolve, reject) { // 通过 base64 上传
-                    let reader = new FileReader()
-                    reader.readAsDataURL(file) // base64
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file); // base64
                     reader.onload = function () {
                         var initImgSize = this.result.length;
                         var img = new Image();
@@ -459,7 +459,7 @@
                             })
                         } else {
                             img.onload = function () { // 当图片加载完成时
-                                var compressUrl = compress(img)
+                                var compressUrl = compress(img);
                                 mcfish.Handle.uploadFileBase64(compressUrl, bath, function (res) {
                                     if (res.status === 0) {
                                         resolve(res.data.fileUrl)
@@ -470,7 +470,7 @@
                             }
                         }
                     }
-                })
+                });
 
                 function compress(img) {
                     var initSize = img.src.length;
@@ -478,8 +478,8 @@
                     var height = img.height;
                     var canvas = document.createElement('canvas');
                     var tCanvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d')
-                    var tctx = tCanvas.getContext('2d')
+                    var ctx = canvas.getContext('2d');
+                    var tctx = tCanvas.getContext('2d');
                     var ratio;
                     if ((ratio = width * height / 4000000) > 1) {
                         ratio = Math.sqrt(ratio);
@@ -601,7 +601,7 @@
                 } else if (result.status == 209) {
                     mizhu.toast("暂无权限", 1000);
                 } else if (result.status == 110 || result.status == 112) {
-                    setTimeout(this.comebackURL, 1000)
+                    setTimeout(this.comebackURL, 1000);
                     mizhu.toast(result.resmsg, 1000);
                 } else {
                     mizhu.toast(result.resmsg, 1500);
@@ -903,7 +903,7 @@
                 } else {
                     time = new Date(otime);
                 }
-                var show_day = new Array('星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日');
+                var show_day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
                 var year = time.getFullYear();
                 var month = time.getMonth() + 1;
                 var date = time.getDate();
@@ -947,7 +947,7 @@
                 if (isOpera) {
                     return "Opera"
                 }
-                ; //判断是否Opera浏览器
+                 //判断是否Opera浏览器
                 if (userAgent.indexOf("Firefox") > -1) {
                     return "FF";
                 } //判断是否Firefox浏览器
@@ -960,7 +960,7 @@
                 if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
                     return "IE";
                 }
-                ; //判断是否IE浏览器
+                 //判断是否IE浏览器
                 if (userAgent.indexOf("Trident") > -1) {
                     return "Edge";
                 } //判断是否Edge浏览器
@@ -1084,11 +1084,11 @@
             }
 
         }
-    }
+    };
     window.mcfish = mcfish;
     //当页面尺寸变化时调用countHeight来重新计算页面高度
     $(window).resize(function () {
         mcfish.Interceptor.countHeight();
     });
     mcfish.Tools.timerExecute(mcfish.Interceptor.countHeight, 4, 100);
-}(window)
+}(window);

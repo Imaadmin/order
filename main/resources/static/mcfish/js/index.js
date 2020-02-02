@@ -12,18 +12,18 @@ $(function () {
         $(this).on('click', function () {
             $(this).addClass('active').siblings().removeClass('active')
         })
-    })
+    });
 
     //顶部导航切换
     $('.toggle-nav-line').each(function (index, item) {
         $(this).on('click', function () {
-            var id = $(this).data('id')
-            $('.toggle-nav-line').removeClass('toggle-nav-item')
+            var id = $(this).data('id');
+            $('.toggle-nav-line').removeClass('toggle-nav-item');
             if (index === id) {
                 $(this).addClass('toggle-nav-item')
             }
         })
-    })
+    });
 
 
     //弹窗确定事件回调处理
@@ -33,7 +33,7 @@ $(function () {
     })
 
 
-})
+});
 
 //点击刷新按钮
 function refresh() {
@@ -57,39 +57,39 @@ function childToast(info, time) {
 
 
 function menutoggle() {
-    $(document.body).toggleClass('sidebar-collapse')
+    $(document.body).toggleClass('sidebar-collapse');
     if ($(document.body).hasClass('sidebar-collapse')) { // 折叠时
-        $('.top-project, .add-pro-col').hide()
-        $('.toggbtn').addClass('letmarginz')
+        $('.top-project, .add-pro-col').hide();
+        $('.toggbtn').addClass('letmarginz');
         $('.sidebar-menu li > a').css("padding", "12px 5px 12px 10px")
     } else { // 折叠宽度
-        $('.top-project, .add-pro-col').show()
-        $('.toggbtn').removeClass('letmarginz')
+        $('.top-project, .add-pro-col').show();
+        $('.toggbtn').removeClass('letmarginz');
         $('.sidebar-menu li > a').css("padding", "12px 5px 12px 15px")
     }
 }
 
 menuTimer = setInterval(function () { // 菜单栏询阶段---宽度
-    var w = $('#leftMenu').width()
+    var w = $('#leftMenu').width();
     if (w < 60) {
         $('#leftMenu li .text').removeClass('letRdnone')
     } else {
         $('#leftMenu li .text').addClass('letRdnone')
     }
     if ($(document.body).hasClass('sidebar-collapse')) { // 折叠时
-        $('.top-project, .add-pro-col').hide()
+        $('.top-project, .add-pro-col').hide();
         $('.toggbtn').addClass('letmarginz')
     } else { // 折叠宽度
-        $('.top-project, .add-pro-col').show()
+        $('.top-project, .add-pro-col').show();
         $('.toggbtn').removeClass('letmarginz')
     }
     $('#leftMenu li').each(function (index, item) {
         $(this).on('click', function () {
-            $(this).addClass('active').siblings().removeClass('active')
+            $(this).addClass('active').siblings().removeClass('active');
             window.menuFrame.location.href = $(this).find("a").attr("href");
         })
     })
-}, 100)
+}, 100);
 
 
 /**
@@ -168,7 +168,7 @@ function savePwd() {
     var data = {
         oldPassword: oldPassword,
         newPassword: newPassword
-    }
+    };
 
     $api.asyncRequest("shareChangePassword.do", "POST", data).then(function (res) {
         mizhu.toast(res.resmsg, 1000);

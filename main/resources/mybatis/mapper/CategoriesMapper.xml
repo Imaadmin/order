@@ -5,22 +5,14 @@
 <mapper namespace="CategoriesMapper">
 
 
-    <!-- 根据条件获取所有报名课程 -->
+    <!-- 根据条件获取所有分类 -->
     <select id="getCategoriesList" parameterType="pd" resultType="com.example.order.entities.Category">
         select
-        *,
+        a.*,
+        b.category_name as fatherCategoryName,
         (
         select
         count(id)
-        from
-        tb_category
-        <where>
-            <if test="keyword != null and keyword != ''">
-                and (category_name like CONCAT('%',#{keyword},'%'))
-            </if>
-        </where>
-        order by create_time desc
-        ) as total
         from
         tb_category
         <where>
@@ -30,9 +22,45 @@
             </if>
         </where>
         order by create_time desc
+        ) as total
+        from
+        tb_category as a
+        left join tb_category as b on a.father_id = b.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                and (a.category_name like CONCAT('%',#{keyword},'%'))
+            </if>
+        </where>
+        order by create_time desc
         <if test="length != null  and length!='' and length != -1">
             limit #{start},#{length}
         </if>
+    </select>
+
+
+    <!-- 查找子分类 -->
+    <select id="selectChildren" parameterType="pd" resultType="com.example.order.entities.Category">
+        select
+            id,
+            category_name
+        from
+          tb_category
+        where
+        father_id = #{id}
+        order by create_time desc
+    </select>
+
+
+    <!-- 查找所以父分类 -->
+    <select id="getAllFatherCategories" parameterType="pd" resultType="com.example.order.entities.Category">
+        select
+            id,
+            category_name
+        from
+          tb_category
+        where
+        father_id = 0
+        order by create_time desc
     </select>
 
 
@@ -46,7 +74,7 @@
     </delete>
 
 
-    <!-- 得到所有课程 -->
+    <!-- 得到所有分类 -->
     <select id="getAllcategories" parameterType="pd" resultType="com.example.order.entities.Category">
         select
             id,
@@ -57,13 +85,22 @@
     </select>
 
 
-
-    <!-- 新增分类-->
+    <!-- 新增父分类-->
     <insert id="addCategory" keyProperty="id" useGeneratedKeys="true" parameterType="pd">
         insert into
         tb_category
         (category_name, create_time)
         values
         ( #{categoryName},#{create_time})
+    </insert>
+
+
+    <!-- 新增子分类-->
+    <insert id="addSunCategory" keyProperty="id" useGeneratedKeys="true" parameterType="pd">
+        insert into
+        tb_category
+        (father_id,category_name, create_time)
+        values
+        ( #{categoryFatherId},#{categoryNameSun},#{create_time})
     </insert>
 </mapper>

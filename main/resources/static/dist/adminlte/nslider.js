@@ -31,8 +31,6 @@
                 slide.css({"opacity": "0"});
                 slide.eq(index).css({"opacity": "1"});
             }
-            ;
-
             //显示当前页
             slideFadeIn = function () {
                 if (!navigator.userAgent.match(/mobile/i)) {
@@ -48,7 +46,6 @@
                         "-webkit-transition": settings.fadespeed / 1000 + "s"
                     });
                 }
-                ;
             };
 
             //翻页加，判断是否循环
@@ -58,7 +55,6 @@
                 } else {
                     index == len ? index = len : index++;
                 }
-                ;
                 slideFadeIn();
             };
 
@@ -69,7 +65,6 @@
                 } else {
                     index == 0 ? index = 0 : index--;
                 }
-                ;
                 slideFadeIn();
             };
 
@@ -83,13 +78,13 @@
                 $paginationBox.append(paginationStr);
                 $box.append($paginationBox);
                 $(".pagination li a").eq(index).addClass("active");
-            }
+            };
 
             //当前页码
             pageActive = function () {
-                $(".pagination li a").removeAttr("class")
+                $(".pagination li a").removeAttr("class");
                 $(".pagination li a").eq(index).addClass("active");
-            }
+            };
 
             // //是否需要左右导航图标
             // if(settings.nav) {
@@ -121,8 +116,6 @@
                     pageActive();
                 });
             }
-            ;
-
             //页码居中
             if (settings.pagecenter) {
                 var pw = $(".pagination").width();
@@ -134,8 +127,6 @@
                     "z-index": "99"
                 })
             }
-            ;
-
             //是否自动播放
             if (settings.auto) {
                 var play = setInterval(function () {
@@ -152,8 +143,6 @@
                         }, settings.playspeed);
                     });
             }
-            ;
-
         });
     };
 

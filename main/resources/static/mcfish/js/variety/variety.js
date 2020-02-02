@@ -11,11 +11,11 @@ $(function () {
         var file = $(this)[0].files[0];
 
         if (!file) {
-            mizhu.toast('上传文件不能为空')
+            mizhu.toast('上传文件不能为空');
             return
         }
         if (!$tools.fileTypeJudge(file, ["jpg", "png", "jpeg"])) {
-            mizhu.toast('请上传正确格式的文档')
+            mizhu.toast('请上传正确格式的文档');
             return
         }
 
@@ -33,11 +33,11 @@ $(function () {
         $("#varietyIcon").attr("src", "");
         $("#picUrl").val("");
     });
-})
+});
 
 
 /******************************************************************************************
- ************************     菜品管理列表页面-start            ****************************
+ ************************     商品管理列表页面-start            ****************************
  ******************************************************************************************/
 
 
@@ -54,7 +54,7 @@ function getAllCategories() {
             str += '<option value=' + dom.id + '>' + dom.categoryName + '</option>';
         });
         $("#categoryId").html(str1 + str);
-    })
+    });
     getVarietyList();
 }
 
@@ -90,7 +90,7 @@ function getVarietyList() {
         data: {
             categoryId: categoryId
         }
-    }
+    };
     var colData = [
         {
             "data": "url", 'sClass': "text-center col-width-120",
@@ -103,19 +103,20 @@ function getVarietyList() {
         },
         {"data": "varietyName", 'sClass': "text-left col-width-160"},
         {"data": "categoryName", 'sClass': "text-left col-width-160"},
-        {"data": "contents", 'sClass': "text-left col-width-160"},
-        {"data": "price", 'sClass': "text-left col-width-160",
+        {"data": "price", 'sClass': "text-left col-width-120",
             "render": function ( data, type, full, meta ) {
                 return mcfish.Tools.toMoney(data,2 );
             }
         },
+        {"data": "count", 'sClass': "text-left col-width-80"},
+        {"data": "contents", 'sClass': "text-left col-width-160"},
         {
             "data": "createTime", 'sClass': "text-center col-width-180",
             "render": function (data, type, full, meta) {
                 return mcfish.Tools.getMyDate(data, 1);
             }
         },
-    ]
+    ];
     VarietyTable = $api.getDataTable('#VarietyList', ajaxParams, colData);
 }
 
@@ -138,26 +139,28 @@ function addVariety() {
  */
 function clearView() {
     $("#category").children().remove();
-    $("#varietyName").val("")
-    $("#price").val("")
-    $("#contents").val("")
+    $("#varietyName").val("");
+    $("#price").val("");
+    $("#contents").val("");
+    $("#count").val("");
     $("#varietyIcon").attr("src", "http://wx.qlogo.cn/mmopen/vi_32/nrZwlTIgnN95WrbOdcJHYfGR6PqAd3NEVNevWIlADOibM8ojK51moJcgUyia8lcUmOVk8PkliaA3V9jBfemicdJQOA/0");
 }
 
 
 /**
- * 保存新添加报名课程
+ * 保存新添商品
  */
 function saveEditInfo() {
 
-    var url = $("#varietyIcon").attr("src")
-    var cid = $("#category").val()
-    var varietyName = $("#varietyName").val()
-    var contents = $("#contents").val()
-    var price = $("#price").val()
+    var url = $("#varietyIcon").attr("src");
+    var cid = $("#category").val();
+    var varietyName = $("#varietyName").val();
+    var contents = $("#contents").val();
+    var price = $("#price").val();
+    var count = $("#count").val();
 
     if (!varietyName) {
-        mizhu.toast("请输入菜品名", 1000);
+        mizhu.toast("请输入商品名", 1000);
         return false;
     }
     if (!cid) {
@@ -172,10 +175,19 @@ function saveEditInfo() {
         mizhu.toast("请输入价格", 1000);
         return false;
     }
+    if (!count) {
+        mizhu.toast("请输入库存", 1000);
+        return false;
+    }
 
-    var reg = /^[0-9]+(.[0-9]{2})?$/
+    var reg = /^[0-9]+(.[0-9]{2})?$/;
     if (!reg.test(price)) {
         mizhu.toast("请输入格式正确的价格 如1.00", 1000);
+        return false;
+    }
+    var reg = /^[0-9]?$/;
+    if (!reg.test(count)) {
+        mizhu.toast("请输入一个整数", 1000);
         return false;
     }
     if (!url) {
@@ -188,7 +200,8 @@ function saveEditInfo() {
         varietyName: varietyName,
         contents:    contents,
         price:       price,
-    }
+        count:       count,
+    };
 
     var url = "addVariety";
     $api.asyncRequest(url, "POST", data).then(function (res) {

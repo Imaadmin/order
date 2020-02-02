@@ -23,7 +23,7 @@ public class LoginController extends BaseController {
     AdminService adminService;
 
     @RequestMapping(value = "/tologin")
-    public String tologin() throws Exception {
+    public String tologin() {
 
         return "login";
     }

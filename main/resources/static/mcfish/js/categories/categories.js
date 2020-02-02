@@ -3,7 +3,7 @@ const $api = mcfish.API;
 $(function () {
     //获取分类列表
     getCategoriesList();
-})
+});
 
 
 /******************************************************************************************
@@ -22,9 +22,10 @@ function getCategoriesList() {
         paging: true,
         data: {
     }
-    }
+    };
     var colData = [
         {"data": "id", 'sClass': "text-left col-width-80"},
+        {"data": "fatherCategoryName", 'sClass': "text-left col-width-160"},
         {"data": "categoryName", 'sClass': "text-left col-width-160"},
         {"data": "createTime",'sClass' : "text-center col-width-160",
             "render": function ( data, type, full, meta ) {
@@ -37,13 +38,13 @@ function getCategoriesList() {
                 return  "<span class='tab_text_blue pointer' onclick=deleteCategory(" + data + ");>删除</span>&nbsp;&nbsp;";
             }
         },
-    ]
+    ];
     categoriesTable = $api.getDataTable('#categoriesList', ajaxParams, colData);
 }
 
 
 /**
- * 打开添加报名课程弹窗
+ * 打开添加父分类弹窗
  */
 function addCategories() {
 
@@ -55,19 +56,21 @@ function addCategories() {
 
 
 /**
- * 清除代理弹窗中的历史数据
+ * 清除分类名弹窗中的历史数据
  */
 function clearView() {
-    $("#categoryName").val("")
+    $("#categoryName").val("");
+    $("#categoryNameSun").val("");
+    $("#categoryId").val("")
 }
 
 
 /**
- * 保存新添加报名课程
+ * 保存新添加父分类名
  */
 function saveEditInfo() {
 
-    var categoryName = $("#categoryName").val()
+    var categoryName = $("#categoryName").val();
 
     if (categoryName == "" || categoryName == null) {
         mizhu.toast("请输入分类名", 1000);
@@ -76,7 +79,7 @@ function saveEditInfo() {
 
     var data = {
         categoryName: categoryName,
-    }
+    };
 
     var url = "addCategory";
 
@@ -91,8 +94,71 @@ function saveEditInfo() {
 }
 
 
+function addSunCategories() {
+
+    //清除弹窗中的历史数据
+    clearView();
+    getAllFatherCategories();
+
+}
+
+
 /**
- * 删除报名课堂
+ * 获得所有父分类
+ * @returns
+ */
+function getAllFatherCategories() {
+    var url = "getAllFatherCategories";
+    $api.asyncRequest(url, "POST", null).then(function (res) {
+        var str1 = '<option value="">请选择父分类</option>';
+        var str = '';
+        $.each(res.data, function (i, dom) {
+            str += '<option value=' + dom.id + '>' + dom.categoryName + '</option>';
+        });
+        $("#categoryId").html(str1 + str);
+    });
+    $("#updatabtnSun").attr("onclick", "saveSunEditInfo()");
+    $("#AddSunCategoryView").modal("toggle");
+}
+
+
+/**
+ * 保存新添加分类名
+ */
+function saveSunEditInfo() {
+
+    var categoryFatherId = $("#categoryId").val();
+    var categoryNameSun = $("#categoryNameSun").val();
+
+    if (categoryFatherId == "" || categoryName == null) {
+        mizhu.toast("请选择父分类", 1000);
+        return false;
+    }
+    if (categoryNameSun == "" || categoryNameSun == null) {
+        mizhu.toast("请输入分类名", 1000);
+        return false;
+    }
+
+    var data = {
+        categoryNameSun: categoryNameSun,
+        categoryFatherId:categoryFatherId,
+    };
+
+    var url = "addSunCategory";
+
+
+    $api.asyncRequest(url, "POST", data).then(function (res) {
+
+        $("#AddSunCategoryView").modal("toggle");
+        mizhu.toast(res.resmsg, 1000);
+        categoriesTable.ajax.reload(null, false);
+    });
+
+}
+
+
+/**
+ * 删除分类
  * @param id
  * @returns
  */

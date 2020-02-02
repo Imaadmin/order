@@ -47,8 +47,8 @@
     <insert id="addVariety" parameterType="pd">
         insert into
         tb_variety
-        (url, categoryId, create_time, variety_name, contents,price)
+        (url, categoryId, create_time, variety_name, contents,price,count)
         VALUES
-        (#{url} , #{cid}, #{create_time}, #{varietyName}, #{contents}, #{price})
+        (#{url} , #{cid}, #{create_time}, #{varietyName}, #{contents}, #{price}, #{count})
     </insert>
 </mapper>

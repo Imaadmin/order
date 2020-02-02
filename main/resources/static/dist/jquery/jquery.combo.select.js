@@ -69,11 +69,11 @@
 
         /* Reverse lookup */
 
-        this.el = element
+        this.el = element;
 
         /* Element */
 
-        this.$el = $(element)
+        this.$el = $(element);
 
         /* If multiple select: stop */
 
@@ -89,7 +89,7 @@
 
         /* Options */
 
-        this.$options = this.$el.find('option, optgroup')
+        this.$options = this.$el.find('option, optgroup');
 
         /* Initialize */
 
@@ -117,18 +117,18 @@
         },
         _construct: function () {
 
-            var self = this
+            var self = this;
 
             /**
              * Add negative TabIndex to `select`
              * Preserves previous tabindex
              */
 
-            this.$el.data('plugin_' + dataKey + '_tabindex', this.$el.prop('tabindex'))
+            this.$el.data('plugin_' + dataKey + '_tabindex', this.$el.prop('tabindex'));
 
             /* Add a tab index for desktop browsers */
 
-            !isMobile && this.$el.prop("tabIndex", -1)
+            !isMobile && this.$el.prop("tabIndex", -1);
 
             /**
              * Wrap the Select
@@ -150,14 +150,14 @@
              * Append dropdown arrow
              */
 
-            this.$arrow = $('<div class="' + this.settings.comboArrowClass + '" />').appendTo(this.$container)
+            this.$arrow = $('<div class="' + this.settings.comboArrowClass + '" />').appendTo(this.$container);
 
 
             /**
              * Append dropdown
              */
 
-            this.$dropdown = $('<ul class="' + this.settings.comboDropDownClass + '" />').appendTo(this.$container)
+            this.$dropdown = $('<ul class="' + this.settings.comboDropDownClass + '" />').appendTo(this.$container);
 
 
             /**
@@ -166,7 +166,7 @@
 
             var o = '', k = 0, p = '';
 
-            this.selectedIndex = this.$el.prop('selectedIndex')
+            this.selectedIndex = this.$el.prop('selectedIndex');
 
             this.$options.each(function (i, e) {
 
@@ -175,14 +175,14 @@
                     return o += '<li class="option-group">' + this.label + '</li>'
                 }
 
-                if (!e.value) p = e.innerHTML
+                if (!e.value) p = e.innerHTML;
 
-                o += '<li class="' + (this.disabled ? self.settings.disabledClass : "option-item") + ' ' + (k == self.selectedIndex ? self.settings.selectedClass : '') + '" data-index="' + (k) + '" data-value="' + this.value + '">' + (this.innerHTML) + '</li>'
+                o += '<li class="' + (this.disabled ? self.settings.disabledClass : "option-item") + ' ' + (k == self.selectedIndex ? self.settings.selectedClass : '') + '" data-index="' + (k) + '" data-value="' + this.value + '">' + (this.innerHTML) + '</li>';
 
                 k++;
-            })
+            });
 
-            this.$dropdown.html(o)
+            this.$dropdown.html(o);
 
             /**
              * Items
@@ -195,7 +195,7 @@
              * Append Input
              */
 
-            this.$input = $('<input type="text"' + (isMobile ? 'tabindex="-1"' : '') + ' placeholder="' + p + '" class="' + this.settings.inputClass + '">').appendTo(this.$container)
+            this.$input = $('<input type="text"' + (isMobile ? 'tabindex="-1"' : '') + ' placeholder="' + p + '" class="' + this.settings.inputClass + '">').appendTo(this.$container);
 
             /* Update input text */
 
@@ -207,7 +207,7 @@
 
             /* Input: focus */
 
-            this.$container.on('focus.input', 'input', $.proxy(this._focus, this))
+            this.$container.on('focus.input', 'input', $.proxy(this._focus, this));
 
             /**
              * Input: mouseup
@@ -215,35 +215,35 @@
              */
             this.$container.on('mouseup.input', 'input', function (e) {
                 e.preventDefault()
-            })
+            });
 
             /* Input: blur */
 
-            this.$container.on('blur.input', 'input', $.proxy(this._blur, this))
+            this.$container.on('blur.input', 'input', $.proxy(this._blur, this));
 
             /* Select: change */
 
-            this.$el.on('change.select', $.proxy(this._change, this))
+            this.$el.on('change.select', $.proxy(this._change, this));
 
             /* Select: focus */
 
-            this.$el.on('focus.select', $.proxy(this._focus, this))
+            this.$el.on('focus.select', $.proxy(this._focus, this));
 
             /* Select: blur */
 
-            this.$el.on('blur.select', $.proxy(this._blurSelect, this))
+            this.$el.on('blur.select', $.proxy(this._blurSelect, this));
 
             /* Dropdown Arrow: click */
 
-            this.$container.on('click.arrow', '.' + this.settings.comboArrowClass, $.proxy(this._toggle, this))
+            this.$container.on('click.arrow', '.' + this.settings.comboArrowClass, $.proxy(this._toggle, this));
 
             /* Dropdown: close */
 
-            this.$container.on('comboselect:close', $.proxy(this._close, this))
+            this.$container.on('comboselect:close', $.proxy(this._close, this));
 
             /* Dropdown: open */
 
-            this.$container.on('comboselect:open', $.proxy(this._open, this))
+            this.$container.on('comboselect:open', $.proxy(this._open, this));
 
 
             /* HTML Click */
@@ -261,16 +261,16 @@
 
             this.$container.on('click.comboselect', function (e) {
                 e.stopPropagation();
-            })
+            });
 
 
             /* Input: keydown */
 
-            this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
+            this.$container.on('keydown', 'input', $.proxy(this._keydown, this));
 
             /* Input: keyup */
 
-            this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
+            this.$container.on('keyup', 'input', $.proxy(this._keyup, this));
 
             /* Dropdown item: click */
 
@@ -284,15 +284,15 @@
             switch (event.which) {
 
                 case keys.UP:
-                    this._move('up', event)
+                    this._move('up', event);
                     break;
 
                 case keys.DOWN:
-                    this._move('down', event)
+                    this._move('down', event);
                     break;
 
                 case keys.TAB:
-                    this._enter(event)
+                    this._enter(event);
                     break;
 
                 case keys.RIGHT:
@@ -316,7 +316,7 @@
 
             switch (event.which) {
                 case keys.ESC:
-                    this.$container.trigger('comboselect:close')
+                    this.$container.trigger('comboselect:close');
                     break;
 
                 case keys.ENTER:
@@ -329,14 +329,14 @@
                     break;
 
                 default:
-                    this._filter(event.target.value)
+                    this._filter(event.target.value);
                     break;
             }
         },
 
         _enter: function (event) {
 
-            var item = this._getHovered()
+            var item = this._getHovered();
 
             item.length && this._select(item);
 
@@ -362,7 +362,7 @@
             var items = this._getVisible(),
                 current = this._getHovered(),
                 index = current.prevAll('.option-item').filter(':visible').length,
-                total = items.length
+                total = items.length;
 
 
             switch (dir) {
@@ -381,7 +381,7 @@
             items
                 .removeClass(this.settings.hoverClass)
                 .eq(index)
-                .addClass(this.settings.hoverClass)
+                .addClass(this.settings.hoverClass);
 
 
             if (!this.opened) this.$container.trigger('comboselect:open');
@@ -432,7 +432,7 @@
 
             if (item.length) {
 
-                var index = item.data('index')
+                var index = item.data('index');
 
                 this._selectByIndex(index)
 
@@ -482,7 +482,7 @@
                             $this
                                 .html(function (index, oldhtml) {
                                     return oldhtml.replace(new RegExp(pattern, 'gi'), '<span class="' + self.settings.markerClass + '">$1</span>')
-                                })
+                                });
 
                             return true
                         }
@@ -511,7 +511,7 @@
             */
 
             var visible = this._getVisible().removeClass(this.settings.hoverClass),
-                $selected = visible.filter('.' + this.settings.selectedClass)
+                $selected = visible.filter('.' + this.settings.selectedClass);
 
             if ($selected.length) {
 
@@ -529,11 +529,11 @@
 
         _updateInput: function () {
 
-            var selected = this.$el.prop('selectedIndex')
+            var selected = this.$el.prop('selectedIndex');
 
             if (this.$el.val()) {
 
-                text = this.$el.find('option').eq(selected).text()
+                text = this.$el.find('option').eq(selected).text();
 
                 this.$input.val(text)
 
@@ -595,7 +595,7 @@
 
                 return $.trim(this.innerHTML).toLowerCase() == val
 
-            }).prop('index')
+            }).prop('index');
 
             /* Select by Index */
 
@@ -629,11 +629,11 @@
 
         _open: function () {
 
-            var self = this
+            var self = this;
 
-            this.$container.addClass('combo-open')
+            this.$container.addClass('combo-open');
 
-            this.opened = true
+            this.opened = true;
 
             /* Focus input field */
 
@@ -643,11 +643,11 @@
 
             /* Highligh the items */
 
-            this._highlight()
+            this._highlight();
 
             /* Fix scroll */
 
-            this._fixScroll()
+            this._fixScroll();
 
             /* Close all others */
 
@@ -666,11 +666,11 @@
 
         _close: function () {
 
-            this.$container.removeClass('combo-open combo-focus')
+            this.$container.removeClass('combo-open combo-focus');
 
-            this.$container.trigger('comboselect:closed')
+            this.$container.trigger('comboselect:closed');
 
-            this.opened = false
+            this.opened = false;
 
             /* Show all items */
 
@@ -699,7 +699,7 @@
             var offsetTop,
                 upperBound,
                 lowerBound,
-                heightDelta = item.outerHeight()
+                heightDelta = item.outerHeight();
 
             offsetTop = item[0].offsetTop;
 
@@ -725,15 +725,15 @@
 
             /* Remove combo arrow, input, dropdown */
 
-            this.$arrow.remove()
+            this.$arrow.remove();
 
-            this.$input.remove()
+            this.$input.remove();
 
-            this.$dropdown.remove()
+            this.$dropdown.remove();
 
             /* Remove tabindex property */
             this.$el
-                .removeAttr("tabindex")
+                .removeAttr("tabindex");
 
             /* Check if there is a tabindex set before */
 
@@ -743,15 +743,15 @@
 
             /* Unwrap */
 
-            this.$el.unwrap()
+            this.$el.unwrap();
 
             /* Remove data */
 
-            this.$el.removeData('plugin_' + dataKey)
+            this.$el.removeData('plugin_' + dataKey);
 
             /* Remove tabindex data */
 
-            this.$el.removeData('plugin_' + dataKey + '_tabindex')
+            this.$el.removeData('plugin_' + dataKey + '_tabindex');
 
             /* Remove change event on select */
 
@@ -768,7 +768,7 @@
         this.each(function () {
 
             var $e = $(this),
-                instance = $e.data('plugin_' + dataKey)
+                instance = $e.data('plugin_' + dataKey);
 
             if (typeof options === 'string') {
 

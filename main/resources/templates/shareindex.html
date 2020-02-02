@@ -19,12 +19,11 @@
         }
     </style>
     <!-- jQuery 3 -->
-    <script th:src="@{/static/dist/jquery/jquery.min.js}" src="dist/jquery/jquery.min.js"></script>
     <script>
         function iframeHight() {
             var ifm = document.getElementById("menuFrame");
-            ifm.height = document.documentElement.clientHeight
-            var bodyHeight = document.body.clientHeight
+            ifm.height = document.documentElement.clientHeight;
+            var bodyHeight = document.body.clientHeight;
             $('#leftMenu').css({
                 'height': bodyHeight,
                 'overflow-y': 'auto'
@@ -42,8 +41,8 @@
     <header class="main-header">
         <a href="${pageContext.request.contextPath}/shareBasicController/toWelcomePage.do"
            th:href="@{/shareBasicController/toWelcomePage}" target="menuFrame" class="logo">
-            <span class="logo-mini" style="color: #ff9751;"><b>订</b>单</span>
-            <span class="logo-lg"><b id="indexProjectName">订单管理</b></span>
+            <span class="logo-mini" style="color: #ff9751;"><b>超</b>市</span>
+            <span class="logo-lg"><b id="indexProjectName">校园超市</b></span>
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation">
@@ -64,7 +63,7 @@
 										</span>
                             </a>
                         </li>
-                        <li onclick="refresh();"><a href="javascript:;"><i class="fa fa-refresh"></i></a>
+                        <li onclick="refresh();"><a href="javascript:"><i class="fa fa-refresh"></i></a>
                             <!-- 用户按钮 -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -75,10 +74,10 @@
                             </a>
                             <ul class="dropdown-menu systemConfig">
                                 <li class="visi-settings">
-                                    <a href="javascript:;" target="menuFrame" onclick="openEditPwdView()">修改密码</a>
+                                    <a href="javascript:" target="menuFrame" onclick="openEditPwdView()">修改密码</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" onclick="loginOut()">注销</a>
+                                    <a href="javascript:" onclick="loginOut()">注销</a>
                                 </li>
                             </ul>
                         </li>
@@ -136,7 +135,7 @@
                            target="menuFrame">
                             <i class="fa fa-camera-retro">
                             </i>
-                            <span>菜品管理</span>
+                            <span>商品管理</span>
                         </a>
                     </li>
                     <li class="treeview" id="">
@@ -148,6 +147,7 @@
                             <span>订单管理</span>
                         </a>
                     </li>
+
                 </ul>
             </ul>
         </section>
@@ -223,7 +223,7 @@
     </div>
 </div>
 
-
+<script th:src="@{/static/dist/jquery/jquery.min.js}" src="dist/jquery/jquery.min.js"></script>
 <script th:src="@{/static/dist/jquery/ui.js}" src="dist/jquery/ui.js"></script>
 <script th:src="@{/static/dist/bootstrap/bootstrap.min.js}" src="dist/bootstrap/bootstrap.min.js"></script>
 <script th:src="@{/static/dist/bootstrap/checkbix.min.js}" src="dist/bootstrap/checkbix.min.js"></script>
